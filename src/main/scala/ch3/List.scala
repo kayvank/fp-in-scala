@@ -5,12 +5,18 @@ case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 object List {
+
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) ⇒ B):  B = as match {
+    case Nil ⇒ z
+    case Cons(h, t) ⇒ f(h, foldRight(t, z)(f) )
+  }
+
   def _sum(ints: List[Int]): Int =  ints match {
     case Nil ⇒ 0
     case Cons(h, t) ⇒ h + _sum(t)
-  }
+   }
   def sum(ints: List[Int]): Int = {
-    def helper(acc: Int, a:List[Int]): Int = a match {
+    def helper(acc: Int, a:List[Int]): Int =  a match {
       case Nil ⇒  acc
       case Cons(h, t) ⇒ helper(acc + h, t)
     }
@@ -55,10 +61,11 @@ object List {
     case Cons(_, t) ⇒ Cons(a, t)
   }
 
-  // def init[A](ls: List[A]): List[A] = ls match {
-  //   case Nil ⇒ Nil
-  //   case Cons(h,  t) ⇒ 
-  // }
+  def init[A](ls: List[A]): List[A] = ls match {
+    case Nil ⇒ Nil
+    case Cons(_,  Nil) ⇒  Nil
+    case Cons(h,  t) ⇒  Cons(h, init(t))
+  }
   // example of variadic function, accepts 0 or more args
   def apply[A](as: A*): List[A] =
     if(as.isEmpty) Nil

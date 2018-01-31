@@ -11,3 +11,8 @@
 **** abstracting over types
      these are functions that work for any given type, also known as parametric polymorphism 
 **** type parameters & type variable
+
+** § 3
+
+*** when function definition contains multiple argument groups, type info flows from left to right across args group
+
