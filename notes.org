@@ -1,0 +1,13 @@
+* functional programming in Scala notes
+** § 1
+*** Referential Transparency, RT
+    forces the invariant that everything a function does is represented by a value that is returned.
+**** RT enables equational reasoning
+*** Pure function 
+
+
+** § 2
+*** Polymorphic functions 
+**** abstracting over types
+     these are functions that work for any given type, also known as parametric polymorphism 
+**** type parameters & type variable
