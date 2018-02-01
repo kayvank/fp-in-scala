@@ -5,11 +5,11 @@ case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 object List {
-
-  def foldRight[A, B](as: List[A], z: B)(f: (A, B) ⇒ B):  B = as match {
-    case Nil ⇒ z
-    case Cons(h, t) ⇒ f(h, foldRight(t, z)(f) )
-  }
+  
+  def apply[A](as: A*): List[A] =// variadic func accepts 0 or more args
+    if(as.isEmpty) Nil
+    else
+      Cons(as.head, apply(as.tail: _*))
 
   def _sum(ints: List[Int]): Int =  ints match {
     case Nil ⇒ 0
@@ -66,10 +66,40 @@ object List {
     case Cons(_,  Nil) ⇒  Nil
     case Cons(h,  t) ⇒  Cons(h, init(t))
   }
-  // example of variadic function, accepts 0 or more args
-  def apply[A](as: A*): List[A] =
-    if(as.isEmpty) Nil
-    else
-      Cons(as.head, apply(as.tail: _*))
 
+  def _foldRight[A, B](as: List[A], z: B)(f: (A, B) ⇒ B):  B = as match {
+    case Nil ⇒ z
+    case Cons(h, t) ⇒ f(h, foldRight(t, z)(f) )
+  }
+  
+// @tailrec
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) ⇒ B):  B =  {
+    def helper(_z: B, ls: List[A]): B = {
+      ls match {
+        case Nil ⇒ _z
+        case Cons(h, t) ⇒  helper(f(h, _z), t)
+      }
+    }
+    helper(z, as)
+  }
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) ⇒ B):  B =  {
+    def helper(_z: B, ls: List[A]): B = {
+      ls match {
+        case Nil ⇒ _z
+        case Cons(h, t) ⇒  helper(f(_z, h), t)
+      }
+    }
+    helper(z, as)
+  }
+
+  def foldSum[A](z: Int, ls: List[A], f: (Int, A) ⇒ Int): Int =
+    foldLeft[A, Int](ls, z)(f)
+  def foldLeftSum(ls: List[Int] ) =
+    foldSum[Int](0, ls,  _ + _)
+  def foldLeftProduct(ls: List[Int] ) =
+    foldSum[Int](1, ls,  _ * _)
+  def foldLeftLength[A](ls: List[A] ) =
+    foldSum[A](0, ls, (acc: Int, curr: A) ⇒ acc+ 1)
+  def reverse[A] (ls: List[A]): List[A] =
+    foldLeft[A, List[A]](ls, Nil)( (acc, cur) ⇒ Cons(cur, acc))
 }
