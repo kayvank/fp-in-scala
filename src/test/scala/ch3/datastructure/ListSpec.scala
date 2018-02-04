@@ -1,11 +1,11 @@
 package ch3.datastructure
 
 import org.specs2._
-import ch3.datastructure.List._ 
+import ch3.datastructure.List._
 
-class DatastructureSpec extends Specification { def is = s2"""
+class ListSpec extends Specification { def is = s2"""
 
- Chapter 3 specifications
+ Chapter 3 List specifications
   List sum $e1
   List product $e2
   List Ex 3.1 $e3
@@ -19,8 +19,11 @@ class DatastructureSpec extends Specification { def is = s2"""
   List Ex 3.3.11 Sum foldLeft impl  $e12
   List Ex 3.3.11 length foldLeft impl  $e13
   List Ex 3.3.11 product foldLeft impl  $e14
+  List Ex 3.3.18 map foldLeft impl  $e15
+  List Ex 3.3.19 filter foldLeft impl  $e16
+  List Ex 3.3.20 flatAppend foldLeft impl  $e17
+  List Ex 3.3.20 flatMap foldLeft impl  $e18
 """
-
   def e1 = sum(List(1,2,3)) must_== 6 
   def e2 = product(List(2.0, 3.0, 4.0)) must_== 24.0
   def e3 = {
@@ -45,4 +48,11 @@ class DatastructureSpec extends Specification { def is = s2"""
   def e12 = foldLeftSum(List(1,2,3)) must_== 6
   def e13 = foldLeftLength(List(1,2,3)) must_== 3
   def e14 = foldLeftProduct(List(1,2,3,4)) must_== 24 
+  def e15 = foldMap[Int, Int](List(1,2,3,4))((x ⇒ x*3): Int ⇒ Int
+  ) must_== reverse(List(3, 6, 9, 12))
+  def e16 = foldFilter[Int](List(0,1,2,3,4))((x ⇒ x<3): Int ⇒ Boolean ) must_== reverse(List(0,1,2))
+  def e17=foldAppend[Int](List(5, 4), List(1,2,3)) must_== List(4, 5, 1,2,3)
+  def e18 = foldFlatMap[Int, Int](List(1,2,3))(x ⇒ List(x, x))  must_==
+    reverse(List(1,1,2,2,3,3))
+
 }

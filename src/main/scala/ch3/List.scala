@@ -94,12 +94,29 @@ object List {
 
   def foldSum[A](z: Int, ls: List[A], f: (Int, A) ⇒ Int): Int =
     foldLeft[A, Int](ls, z)(f)
+
   def foldLeftSum(ls: List[Int] ) =
+
     foldSum[Int](0, ls,  _ + _)
+
   def foldLeftProduct(ls: List[Int] ) =
     foldSum[Int](1, ls,  _ * _)
+
   def foldLeftLength[A](ls: List[A] ) =
     foldSum[A](0, ls, (acc: Int, curr: A) ⇒ acc+ 1)
+
   def reverse[A] (ls: List[A]): List[A] =
     foldLeft[A, List[A]](ls, Nil)( (acc, cur) ⇒ Cons(cur, acc))
+
+  def foldMap[A, B](as: List[A])(f: A⇒B): List[B] =
+    foldLeft[A, List[B]](as, Nil)((acc, cur) ⇒ Cons(f(cur), acc ) )
+
+  def foldFilter[A](as: List[A])(p: A ⇒ Boolean): List[A] = 
+    foldLeft[A, List[A]](as, Nil)((acc, cur) ⇒ if(p(cur)) Cons(cur, acc); else acc )
+
+  def  foldAppend[A](as: List[A], bs: List[A]): List[A] = 
+    foldLeft[A, List[A]](as, bs)( (acc, cur) ⇒ Cons(cur, acc) ) 
+   
+  def foldFlatMap[A, B](as: List[A])(f: A ⇒ List[B]): List[B] = 
+    foldLeft[A, List[B]](as, Nil)( (acc, cur) ⇒ foldAppend(f(cur),acc ) ) 
 }

@@ -13,6 +13,6 @@
 **** type parameters & type variable
 
 ** § 3
-
 *** when function definition contains multiple argument groups, type info flows from left to right across args group
-
+**** form [[http://www.cs.nott.ac.uk/~pszgmh/fold.pdf][fold]
+     
