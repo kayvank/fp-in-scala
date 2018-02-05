@@ -22,11 +22,11 @@ sealed trait Option[+A] {
     case _ ⇒ None
   }
 
-  def lift[A, B](f: A ⇒ B): Option[A] ⇒ Option[B] = _  map f
 }
 case class Some[+A](get: A) extends Option[A]
 case object None extends Option[Nothing]
 object Option {
+  def lift[A, B](f: A ⇒ B): Option[A] ⇒ Option[B] = _ map f
   def map2[A,B,C](a: Option[A], b: Option[B])(f:(A, B) ⇒ C): Option[C] =
     (a,b) match {
       case (None, None) ⇒ None

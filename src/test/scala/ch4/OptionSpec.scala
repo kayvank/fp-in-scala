@@ -20,7 +20,7 @@ chapter 4 Opiton specification
   def e3 = ch4.None.getOrElse(20) must_== 20
   def e4 = ch4.None.orElse(Some(20)) must_== ch4.Some(20)
   def e5 = ch4.Some(20).filter(x ⇒ x > 20 ) must_== None
-  def e6 = ch4.Some(-49) lift math.abs  must_== ch4.Some(math.abs(-49))
+  def e6 = ch4.Option.lift[Int, Int](math.abs)(Some(-49))  must_== ch4.Some(math.abs(-49))
   def e7 = ch4.Option.map2[Int, Double, String](ch4.Some(1), ch4.Some(1.1))(
     (x:Int, y:Double) ⇒ s"${x} --- ${y}") must_== ch4.Some(s"1 --- 1.1")
   def e8 = ch4.Option.sequence[Int](
