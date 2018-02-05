@@ -1,18 +1,28 @@
 * functional programming in Scala notes
+  Yet another review of the [[https://www.manning.com/books/functional-programming-in-scala][fp in scala]]
 ** § 1
 *** Referential Transparency, RT
     forces the invariant that everything a function does is represented by a value that is returned.
 **** RT enables equational reasoning
 *** Pure function 
-
-
 ** § 2
 *** Polymorphic functions 
 **** abstracting over types
      these are functions that work for any given type, also known as parametric polymorphism 
 **** type parameters & type variable
-
 ** § 3
+   Functional data structure
 *** when function definition contains multiple argument groups, type info flows from left to right across args group
-**** form [[http://www.cs.nott.ac.uk/~pszgmh/fold.pdf][fold]
-     
+**** form [[http://www.cs.nott.ac.uk/~pszgmh/fold.pdf][fold]]
+** § 4
+   Handling errors without Exceptions
+*** Variance 
+    refers to how subtyping between more complex types relates to subtyping between their components 
+*** covariant 
+    subtyping relation of the simple types are preserved for the more complex types
+*** contravariant
+    The subtyping relationship is reversed for the more complex types
+*** Option
+**** we can lift ordinary functions to become functions that operate on Options
+     def lift[A, B](f: A=>B): Option[A] => Option[B] = _ map f
+**** 
