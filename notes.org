@@ -1,3 +1,7 @@
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+BEAMER_FRAME_LEVEL: 2
+
 * functional programming in Scala notes
   Yet another review of the [[https://www.manning.com/books/functional-programming-in-scala][fp in scala]]
 ** § 1
@@ -23,6 +27,12 @@
 *** contravariant
     The subtyping relationship is reversed for the more complex types
 *** Option
-**** we can lift ordinary functions to become functions that operate on Options
-     def lift[A, B](f: A=>B): Option[A] => Option[B] = _ map f
-**** 
+**** lift functions to operate on Option
+     def lift[A, B](f: A=>B): Option[A] => Option[B] = _ map f 
+*** Either
+**** used when Option is too simplistic for the use case
+**** represent failure & exceptions with ordinary values
+**** how: 
+***** craft data type that encodes failure
+***** _disjoint union_ of two types
+
