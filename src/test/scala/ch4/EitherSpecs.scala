@@ -3,13 +3,14 @@ package ch4
 import org.specs2._
 
 class EitherSpec extends Specification { def is = s2"""
-
 Chapter 4 Either specifications
-Either 4.6 map $e1
-Either 4.6 flatMap $e2
-Either 4.6 orElse $e3
-Either 4.6 map2 $e4
-Either 4.6 sequence $e5
+
+  Either 4.6 map $e1
+  Either 4.6 flatMap $e2
+  Either 4.6 orElse $e3
+  Either 4.6 map2 $e4
+  Either 4.6 sequence $e5
+
 """
 
   def e1 = ch4.Right[Int](1).map[ Int](x ⇒ x*2) must_== Right(2)
