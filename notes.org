@@ -35,4 +35,10 @@
 **** how: 
 ***** craft data type that encodes failure
 ***** _disjoint union_ of two types
-
+** § 5
+   Strickness & lazyness
+*** Non-strickness
+    to say a function is non-restrict <=> the function may choose  not to evaluate one or more of its args
+*** Strict function always evaluates its arguments
+*** thunk
+    unevaluated form of an expression is called thunk
