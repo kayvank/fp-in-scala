@@ -57,7 +57,7 @@
 case object identity {
   def apply[A](value: A): A = value
 }
-#END_SRC
+#+END_SRC
 
 ** Mastering type
    types are compile time description of a set values
@@ -65,13 +65,13 @@ case object identity {
     defined by Cartesian cross product on 2 more types  
 #+BEGIN_SRC
 type Point2D - (Int, Int)
-#END_SRC
+#+END_SRC
 **** case class are product type
 *** Sum types
     sum types are defined by disjoint union on 2 or more types
 #+BEGIN_SRC
 type RequestResult = Either[Error, HttpResponse]
-#END_SRC
+#+END_SRC
 *** Sealed Traits
     in Scala sealed traits are idiomatic of sum types
 *** Subtyping
