@@ -42,3 +42,41 @@
 *** Strict function always evaluates its arguments
 *** thunk
     unevaluated form of an expression is called thunk
+
+* Advanced functional Programming in Scala
+** Mastering functions
+*** val f: Int => Int = x => x*x 
+    mapping from domain to codomain
+*** higher order functions
+    function that accepts or returns a functions
+*** Combinator
+    higher order functions that accepts or returns functions
+*** Polymorphic Functions
+    Polymorphic function is one that is universally qualified over one or more type parameter
+#+BEGIN_SRC
+case object identity {
+  def apply[A](value: A): A = value
+}
+#END_SRC
+
+** Mastering type
+   types are compile time description of a set values
+*** product type
+    defined by Cartesian cross product on 2 more types  
+#+BEGIN_SRC
+type Point2D - (Int, Int)
+#END_SRC
+**** case class are product type
+*** Sum types
+    sum types are defined by disjoint union on 2 or more types
+#+BEGIN_SRC
+type RequestResult = Either[Error, HttpResponse]
+#END_SRC
+*** Sealed Traits
+    in Scala sealed traits are idiomatic of sum types
+*** Subtyping
+*** Supertyping
+*** Universals
+    Universally-quantified type defines a category/kind of types that are parameterized by some arbitrary type. 
+*** Type Constructors 
+    type constructor is a universally quantified type, which can be used to construct types
